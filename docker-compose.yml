@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:latest
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: pragma
+      MYSQL_USER: pragma
+      MYSQL_PASSWORD: reddog
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
