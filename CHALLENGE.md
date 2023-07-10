@@ -3,37 +3,42 @@
 ## Prerequisites
 
 - Docker installed
-- Have a github account
+- Have a GitHub account
 
 ## Challenge Description
 
-For this challenge you will need to be able to implement a microservice that connects to a MySQL instance and exposes a RESTful API.
-In the reposiotry you will find a docker compose file that contains a MySQL service, after starting the database you will notice two tables STUDIO and GAMES, this tables will have a predefined set of data. <br>
+For this challenge, you will need to be able to implement a microservice that connects to a MySQL instance and exposes a RESTful API.
+In the repository you will find a docker-compose file that contains a MySQL service, after starting the database you will notice two tables, STUDIO and GAME, these tables will have a predefined set of data. <br>
 Try to implement the following service functionalities:
 
-- At the bootstrap of microservice create 3 more Studios entities and 6 games, the new games should respect many to one relation with the studios where one game should have just one studio but one studio can have multiple games.
-- During the run of the microservice the application should choose randomly a game entity and update the rating column with a value between 1 and 5 seconds, this updates should be created to be triggered automaticlly at any 5 seconds by the microservice.
-- Implement CRUD REST endpoints for game entity.
-- The create game endpoint should be able to create the game but with a random float value between 1 and 5.
-- Implement an endpoint where we can receive all games but also be able to filter games by studio.
-- Implement studio delete enpoint, the games of that studio should also be deleted.
+- (Required) Implement create and delete endpoints for the game entity. The create game endpoint should insert the game in the database but with a random decimal value between 1 and 5.
+- (Required) Write integration tests for create endpoint.
+- (Required) Add microservice to docker network where MySQL is running.
+- (Optional) Implement an endpoint where we can receive all games, but also be able to filter games by the studio.
+- (Optional) Implement studio delete endpoint (the games of that studio should also be deleted).
+- (Optional) While the microservice is operating, it should automatically select a random game entity and update the rating column with a decimal value between 1 to 5. The microservice should be programmed to trigger these updates every 5 seconds without manual intervention.
 
 ## Constrains
+
 - The project could be written in Kotlin or other similar languages.
-- Respect a layer directory structure (not a feature or type one) where you will following packages directories: controller, service, component, model and utils.
-- Implement integration tests just for the CRUD game endpoints, the rest of the endpoints will be manual tested using Postman.
-- The microservice should be added to the Docker network where the MySQL is running.
+- Respect layer directory structure (not a feature or type one) where you will use the following package directories: controller, repository, service, component, model, and utils.
 
-## Best Score
+## Higher Score
 
-For the best challenge score we will take a look at:
+For a higher score, we will look at:
 - Complete microservice implementation
+- Write isolated integration tests
 - Language code standards
 - Clean code
-- Solid priciples
+- SOLID principles
 - Basic design patterns
-- Reusable code
-- Test coverage
+- Code reusability
+- Testing best practices
 - Usage of a framework or libraries
 - RESTful services
-- Documentation
+- Git best practices
+- Documentation (README.md and utils functions)
+
+## Notes
+
+- We are not brain hunting people, instead we are looking for passionate people that can integrate with our teams, if you have any questions please contact us at daniel@pragma.gg
