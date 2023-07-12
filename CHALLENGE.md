@@ -12,16 +12,17 @@ In the repository you will find a docker-compose file that contains a MySQL serv
 Try to implement the following service functionalities:
 
 - (Required) Implement create and delete endpoints for the game entity. The create game endpoint should insert the game in the database but with a random decimal value between 1 and 5.
-- (Required) Write integration tests for create endpoint.
-- (Required) Add microservice to docker network where MySQL is running.
-- (Optional) Implement an endpoint where we can receive all games, but also be able to filter games by the studio.
+- (Required) Write integration tests for creating the endpoint.
+- (Required) Add microservice to the docker network where MySQL is running.
+- (Optional) Implement an endpoint where we can receive all games, but also be able to filter matches by the studio.
 - (Optional) Implement studio delete endpoint (the games of that studio should also be deleted).
-- (Optional) While the microservice is operating, it should automatically select a random game entity and update the rating column with a decimal value between 1 to 5. The microservice should be programmed to trigger these updates every 5 seconds without manual intervention.
+- (Optional) While the microservice operates, it should automatically select a random game entity and update the rating column with a decimal value between 1 and 5. The microservice should be programmed to trigger these updates every 5 seconds without manual intervention.
 
 ## Constrains
 
 - The project could be written in Kotlin or other similar languages.
 - Respect layer directory structure (not a feature or type one) where you will use the following package directories: controller, repository, service, component, model, and utils.
+- Fork the repository and invite daniel@pragma.gg to review the changes.
 
 ## Higher Score
 
@@ -41,4 +42,4 @@ For a higher score, we will look at:
 
 ## Notes
 
-- We are not brain hunting people, instead we are looking for passionate people that can integrate with our teams, if you have any questions please contact us at daniel@pragma.gg
+- We are not brain-hunting people, instead, we are looking for passionate people that can integrate with our teams, if you have any questions please get in touch with us at daniel@pragma.gg
