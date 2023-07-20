@@ -1,11 +1,10 @@
 package com.pragma.challenge.controller;
 
-import java.util.*;
-
 import org.springframework.web.bind.annotation.*;
 
 import com.pragma.challenge.model.*;
 import com.pragma.challenge.service.*;
+import com.pragma.challenge.utils.*;
 
 @RestController
 public class StudioController
@@ -16,28 +15,33 @@ public class StudioController
   }
   
   @GetMapping("/studio")
-  List<Studio> all() {
-    return studioService.getAllStudios();
+  @ResponseBody
+  String getAllStudios() {
+    return StringTools.studioListToString(studioService.getAllStudios());
   }
   
   @GetMapping("/studio/{id}")
-  Studio getOne(@PathVariable int id) {
+  @ResponseBody
+  String getOneStudio(@PathVariable int id) {
     
-    return studioService.getOneStudio(id);
+    return studioService.getOneStudio(id).toString();
   }
   
   @PostMapping("/studio")
-  Studio newStudio(@RequestBody Studio newStudio) {
-    return studioService.newStudio(newStudio);
+  @ResponseBody
+  String newStudio(@RequestBody Studio newStudio) {
+    return studioService.newStudio(newStudio).toString();
   }
   
   @PutMapping("/studio/{id}")
-  Studio replaceStudio(@RequestBody Studio newStudio, @PathVariable Integer id) {
+  @ResponseBody
+  String replaceStudio(@RequestBody Studio newStudio, @PathVariable Integer id) {
     
-    return studioService.replaceStudio(newStudio, id);
+    return studioService.replaceStudio(newStudio, id).toString();
   }
   
   @DeleteMapping("/studio/{id}")
+  @ResponseBody
   void deleteStudio(@PathVariable Integer id) {
     studioService.deleteStudio(id);
   }

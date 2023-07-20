@@ -19,9 +19,22 @@ public class Game
   @Column(nullable = false)
   double rating;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.REMOVE)
   @JoinColumn(name="studio_key", referencedColumnName="id")
   Studio studio;
   @Column
   String content;
+  
+  @Override
+  public String toString() {
+    return "#" + id
+        + " name="
+        + name
+        + " | studio="
+        + studio.getName()
+        + " | content="
+        + (content != null ? content : "N/A")
+        + " | rating="
+        + rating;
+  }
 }

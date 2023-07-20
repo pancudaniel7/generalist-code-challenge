@@ -15,8 +15,7 @@ import lombok.*;
 public class StudioServiceImpl implements StudioService
 {
   private final StudioRepository studioRepository;
-  private final Random rand = new Random();
-  
+
   @Override
   public List<Studio> getAllStudios() {
     return studioRepository.findAll();
@@ -26,7 +25,7 @@ public class StudioServiceImpl implements StudioService
   public Studio getOneStudio(int id) {
     
     return studioRepository.findById(id)
-        .orElseThrow(() -> new GameNotFoundException(id));
+        .orElseThrow(() -> new StudioNotFoundException(id));
   }
   
   @Override
@@ -54,11 +53,5 @@ public class StudioServiceImpl implements StudioService
   @Override
   public void deleteStudio(Integer id) {
     studioRepository.deleteById(id);
-  }
-  
-  private int getRandomRating(){
-    int min = 1;
-    int max = 5;
-    return rand.nextInt(max) + min;
   }
 }

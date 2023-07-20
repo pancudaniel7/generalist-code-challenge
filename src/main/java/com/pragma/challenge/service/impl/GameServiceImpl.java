@@ -24,7 +24,6 @@ public class GameServiceImpl implements GameService
   
   @Override
   public Game getOneGame(int id) {
-    
     return gameRepository.findById(id)
         .orElseThrow(() -> new GameNotFoundException(id));
   }
@@ -57,6 +56,13 @@ public class GameServiceImpl implements GameService
   @Override
   public void deleteGame(Integer id) {
     gameRepository.deleteById(id);
+  }
+  
+  @Override
+  public List<Game> getGamesByStudio(String name)
+  {
+    return gameRepository.findAll().stream()
+        .filter(game -> name.equals(game.getStudio().getName())).toList();
   }
   
   private double getRandomRating(){

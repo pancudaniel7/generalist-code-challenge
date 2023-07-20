@@ -17,4 +17,6 @@ public interface GameService
       Integer id);
   
   void deleteGame(Integer id);
+  
+  List<Game> getGamesByStudio(String name);
 }
