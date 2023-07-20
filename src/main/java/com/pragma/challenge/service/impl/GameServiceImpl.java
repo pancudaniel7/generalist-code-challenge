@@ -59,9 +59,9 @@ public class GameServiceImpl implements GameService
     gameRepository.deleteById(id);
   }
   
-  private int getRandomRating(){
+  private double getRandomRating(){
     int min = 1;
-    int max = 5;
-    return rand.nextInt(max) + min;
+    int max = 4;
+    return Math.round((rand.nextDouble(max) + min)*100)/100.0d;
   }
 }
