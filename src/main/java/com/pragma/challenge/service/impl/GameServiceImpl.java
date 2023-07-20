@@ -7,6 +7,7 @@ import org.springframework.stereotype.*;
 import com.pragma.challenge.model.*;
 import com.pragma.challenge.repository.*;
 import com.pragma.challenge.service.*;
+import com.pragma.challenge.utils.*;
 
 import lombok.*;
 
@@ -15,7 +16,7 @@ import lombok.*;
 public class GameServiceImpl implements GameService
 {
   private final GameRepository gameRepository;
-  private final Random rand = new Random();
+ 
   
   @Override
   public List<Game> getAllGames() {
@@ -30,7 +31,7 @@ public class GameServiceImpl implements GameService
   
   @Override
   public Game newGame(Game newGame) {
-    newGame.setRating(getRandomRating());
+    newGame.setRating(RandomTools.getRandomRating(1,5));
     return gameRepository.save(newGame);
   }
   
@@ -43,7 +44,7 @@ public class GameServiceImpl implements GameService
         .map(game -> {
           game.setName(newGame.getName());
           game.setStudio(newGame.getStudio());
-          game.setRating(getRandomRating());
+          game.setRating(RandomTools.getRandomRating(1,5));
           game.setStudio(newGame.getStudio());
           return gameRepository.save(game);
         })
@@ -63,11 +64,5 @@ public class GameServiceImpl implements GameService
   {
     return gameRepository.findAll().stream()
         .filter(game -> name.equals(game.getStudio().getName())).toList();
-  }
-  
-  private double getRandomRating(){
-    int min = 1;
-    int max = 4;
-    return Math.round((rand.nextDouble(max) + min)*100)/100.0d;
   }
 }
