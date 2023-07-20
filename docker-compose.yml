@@ -1,5 +1,13 @@
 version: '3.8'
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '9090:9090'
+    depends_on:
+      - mysql
   mysql:
     image: mysql:latest
     ports:
@@ -11,3 +19,8 @@ services:
       MYSQL_PASSWORD: reddog
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - '8080:8080'
