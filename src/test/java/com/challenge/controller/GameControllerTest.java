@@ -9,21 +9,18 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.challenge.Challenge;
 import com.challenge.model.Game;
 import com.challenge.repository.GameDao;
 import com.challenge.service.GameService;
 
-@ExtendWith(SpringExtension.class)
-@WebAppConfiguration
-@SpringBootTest(properties = "spring.main.lazy-initialization=true",
-		classes = {GameController.class})
+@SpringBootTest
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {Challenge.class})
+@Transactional
 class GameControllerTest {
 
 	@Autowired
