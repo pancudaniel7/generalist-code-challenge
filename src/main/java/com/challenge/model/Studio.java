@@ -16,9 +16,8 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = "studio")
 public class Studio {
+
 	private int id;
-
-
 	private String name;
 	private String city;
 

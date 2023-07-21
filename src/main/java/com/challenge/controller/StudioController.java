@@ -1,7 +1,5 @@
 package com.challenge.controller;
 
-import javax.transaction.Transactional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,6 @@ public class StudioController {
 	StudioService studioService;
 
 	@DeleteMapping("delete/{id}")
-	@Transactional
 	public void deleteStudio(@PathVariable int id) {
 		logger.info("[DELETE] - removing studio with id:" + id + " and it's associated games.");
 		studioService.deleteStudioById(id);
