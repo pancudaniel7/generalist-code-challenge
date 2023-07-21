@@ -3,16 +3,12 @@ package com.pragma.challenge.service.impl;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.context.event.*;
 import org.springframework.context.annotation.*;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.*;
 
 import com.pragma.challenge.model.*;
 import com.pragma.challenge.service.*;
 import com.pragma.challenge.utils.*;
-
-import lombok.*;
 
 @Component
 @Scope("application")
