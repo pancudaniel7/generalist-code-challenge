@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/pragma?allowPublicKeyRetrieval=true&useSSL=false
+    username: pragma
+    password: reddog
+    type: com.mysql.cj.jdbc.MysqlDataSource
+  jpa:
+    hibernate.ddl-auto: none
+    properties.dialect: org.hibernate.dialect.MySQLDialect
+    generate-ddl: true
+    show-sql: true
+  security:
+    user:
+      name: demo
+      password: pragma1challenge
+      role: ADMIN
