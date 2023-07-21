@@ -21,7 +21,7 @@ public class GameService {
 		this.gameDao = gameDao;
 	}
 
-	public void createGame(Game game) {
+	public void saveGame(Game game) {
 		gameDao.save(game);
 	}
 
@@ -51,9 +51,5 @@ public class GameService {
 		} else {
 			throw new IllegalStateException("This game does not exist!");
 		}
-	}
-
-	public void saveGame(Game game) {
-		gameDao.save(game);
 	}
 }

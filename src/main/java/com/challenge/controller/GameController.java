@@ -41,7 +41,7 @@ public class GameController {
 
 		game.setRating(generateRating());
 
-		gameService.createGame(game);
+		gameService.saveGame(game);
 	}
 
 	@GetMapping(value="/view")
