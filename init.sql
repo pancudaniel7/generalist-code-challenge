@@ -15,7 +15,7 @@ CREATE TABLE game (
     rating DECIMAL(3, 1) NOT NULL,
     studio_key INT,
     content TEXT,
-    FOREIGN KEY (studio_key) REFERENCES studio(id)
+    FOREIGN KEY (studio_key) REFERENCES studio(id) ON DELETE CASCADE
 );
 
 -- Insert data into Studio table

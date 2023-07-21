@@ -11,3 +11,15 @@ services:
       MYSQL_PASSWORD: reddog
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  challenge:
+    image: tomcat:8.0-jre8
+    container_name: challenge
+    volumes:
+      - ./build/libs:/usr/local/tomcat/webapps/
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql
