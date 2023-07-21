@@ -19,7 +19,7 @@ public class Game
   @Column(nullable = false)
   double rating;
 
-  @ManyToOne(cascade = CascadeType.REMOVE)
+  @ManyToOne
   @JoinColumn(name="studio_key", referencedColumnName="id")
   Studio studio;
   @Column
