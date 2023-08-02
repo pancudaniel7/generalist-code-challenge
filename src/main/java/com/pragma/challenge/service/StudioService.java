@@ -8,7 +8,7 @@ public interface StudioService
 {
   List<Studio> getAllStudios();
   
-  Studio getOneStudio(int id);
+  Optional<Studio> getOneStudio(int id);
   
   Studio newStudio(Studio newStudio);
   

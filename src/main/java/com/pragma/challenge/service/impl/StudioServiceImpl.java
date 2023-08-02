@@ -2,19 +2,18 @@ package com.pragma.challenge.service.impl;
 
 import java.util.*;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.pragma.challenge.model.*;
 import com.pragma.challenge.repository.*;
 import com.pragma.challenge.service.*;
 
-import lombok.*;
-
 @Service
-@AllArgsConstructor
 public class StudioServiceImpl implements StudioService
 {
-  private final StudioRepository studioRepository;
+  @Autowired
+  private StudioRepository studioRepository;
 
   @Override
   public List<Studio> getAllStudios() {
@@ -22,10 +21,9 @@ public class StudioServiceImpl implements StudioService
   }
   
   @Override
-  public Studio getOneStudio(int id) {
+  public Optional<Studio> getOneStudio(int id) {
     
-    return studioRepository.findById(id)
-        .orElseThrow(() -> new StudioNotFoundException(id));
+    return studioRepository.findById(id);
   }
   
   @Override

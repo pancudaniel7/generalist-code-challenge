@@ -4,12 +4,7 @@ import java.util.*;
 import java.util.stream.*;
 
 import jakarta.persistence.*;
-import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "studio")
 public class Studio
@@ -25,6 +20,46 @@ public class Studio
   @JoinColumn(name="studio_key", referencedColumnName="id")
   List<Game> games;
   
+  public int getId()
+  {
+    return id;
+  }
+  
+  public void setId(int id)
+  {
+    this.id = id;
+  }
+  
+  public String getName()
+  {
+    return name;
+  }
+  
+  public void setName(String name)
+  {
+    this.name = name;
+  }
+  
+  public String getCity()
+  {
+    return city;
+  }
+  
+  public void setCity(String city)
+  {
+    this.city = city;
+  }
+  
+  public List<Game> getGames()
+  {
+    return games;
+  }
+  
+  public void setGames(List<Game> games)
+  {
+    this.games = games;
+  }
+  
   @Override
   public String toString() {
     return "#" + id
@@ -35,7 +70,7 @@ public class Studio
         + " | games=[ "
         + (games.isEmpty() ?
             "N/A"
-            : games.stream().map(Game::getName).collect(Collectors.joining(", ")))
+            : games.stream().map(game -> game.name).collect(Collectors.joining(", ")))
         + " ]";
   }
 }

@@ -8,7 +8,7 @@ public interface GameService
 {
   List<Game> getAllGames();
   
-  Game getOneGame(int id);
+  Optional<Game> getOneGame(int id);
   
   Game newGame(Game newGame);
   

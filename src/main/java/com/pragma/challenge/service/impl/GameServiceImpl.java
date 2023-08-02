@@ -2,6 +2,7 @@ package com.pragma.challenge.service.impl;
 
 import java.util.*;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.pragma.challenge.model.*;
@@ -9,14 +10,13 @@ import com.pragma.challenge.repository.*;
 import com.pragma.challenge.service.*;
 import com.pragma.challenge.utils.*;
 
-import lombok.*;
-
 @Service
-@AllArgsConstructor
 public class GameServiceImpl implements GameService
 {
-  private final GameRepository gameRepository;
- 
+  @Autowired
+  GameRepository gameRepository;
+  @Autowired
+  StudioRepository studioRepository;
   
   @Override
   public List<Game> getAllGames() {
@@ -24,9 +24,8 @@ public class GameServiceImpl implements GameService
   }
   
   @Override
-  public Game getOneGame(int id) {
-    return gameRepository.findById(id)
-        .orElseThrow(() -> new GameNotFoundException(id));
+  public Optional<Game> getOneGame(int id) {
+    return gameRepository.findById(id);
   }
   
   @Override
@@ -43,9 +42,9 @@ public class GameServiceImpl implements GameService
     return gameRepository.findById(id)
         .map(game -> {
           game.setName(newGame.getName());
-          game.setStudio(newGame.getStudio());
+          game.setStudio_key(newGame.getStudio_key());
           game.setRating(RandomTools.getRandomRating(1,5));
-          game.setStudio(newGame.getStudio());
+          game.setStudio_key(newGame.getStudio_key());
           return gameRepository.save(game);
         })
         .orElseGet(() -> {
@@ -62,7 +61,12 @@ public class GameServiceImpl implements GameService
   @Override
   public List<Game> getGamesByStudio(String name)
   {
-    return gameRepository.findAll().stream()
-        .filter(game -> name.equals(game.getStudio().getName())).toList();
+    Optional<Studio> studio = studioRepository.findStudioByName(name);
+    if (studio.isPresent()) {
+      return gameRepository.findAll().stream()
+          .filter(game -> studio.get().getId() == game.getStudio_key()).toList();
+    } else {
+      throw new IllegalStateException("No Studio with name: " + name);
+    }
   }
 }

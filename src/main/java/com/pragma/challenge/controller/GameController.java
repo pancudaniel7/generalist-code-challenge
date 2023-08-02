@@ -2,55 +2,47 @@ package com.pragma.challenge.controller;
 
 import java.util.*;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
 import com.pragma.challenge.model.*;
 import com.pragma.challenge.service.*;
-import com.pragma.challenge.utils.*;
 
 @RestController
 public class GameController
 {
-  private final GameService gameService;
+  @Autowired
+  GameService gameService;
   
-  GameController(GameService gameService) {
-    this.gameService = gameService;
-  }
-  
+
   @GetMapping("/games")
   @ResponseBody
-  String getAllGames() {
-    return StringTools.gameListToString(gameService.getAllGames());
+  List<Game> getGamesByStudio(@RequestParam Optional<String> studioName) {
+    if (studioName.isPresent()) {
+      return gameService.getGamesByStudio(studioName.get());
+    } else {
+      return gameService.getAllGames();
+    }
   }
   
   @GetMapping("/games/{id}")
   @ResponseBody
-  String getOneGame(@PathVariable int id) {
+  Optional<Game> getOneGame(@PathVariable int id) {
     
-    return gameService.getOneGame(id).toString();
-  }
-  
-  @GetMapping("/games/studio")
-  @ResponseBody
-  String getGamesByStudio(@RequestParam Optional<String> name) {
-    if (name.isPresent()) {
-      return StringTools.gameListToString(gameService.getGamesByStudio(name.get()));
-    } else {
-      return StringTools.gameListToString(gameService.getAllGames());
-    }
+    return gameService.getOneGame(id);
   }
   
   @PostMapping("/games")
   @ResponseBody
-  String newGame(@RequestBody Game newGame) {
-    return gameService.newGame(newGame).toString();
+  Game newGame(@RequestBody Game newGame) {
+    return gameService.newGame(newGame);
   }
   
   @PutMapping("/games/{id}")
   @ResponseBody
-  String replaceGame(@RequestBody Game newGame, @PathVariable Integer id) {
+  Game replaceGame(@RequestBody Game newGame, @PathVariable Integer id) {
     
-    return gameService.replaceGame(newGame, id).toString();
+    return gameService.replaceGame(newGame, id);
     
   }
   

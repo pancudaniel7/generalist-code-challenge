@@ -1,4 +1,4 @@
-package com.pragma.challenge;
+package com.pragma.challenge.component;
 
 import java.util.concurrent.*;
 
@@ -14,16 +14,15 @@ import jakarta.annotation.*;
 
 @Component
 public class ExecutorBase {
+  private static final long PERIOD=5000L;
   
   private final ScheduledExecutorService taskExecutor = Executors.newSingleThreadScheduledExecutor();
   @Autowired
-  private ApplicationContext applicationContext;
+  private ParallelRatingsService parallelRatingsService;
 
   @EventListener(ApplicationReadyEvent.class)
   public void atStartup() {
-    ParallelRatingsService parallelRatingsService = applicationContext.getBean(ParallelRatingsService.class);
-    long period = 5000L;
-    taskExecutor.scheduleAtFixedRate(parallelRatingsService, 0, period, TimeUnit.MILLISECONDS);
+    taskExecutor.scheduleAtFixedRate(parallelRatingsService, 0, PERIOD, TimeUnit.MILLISECONDS);
   }
   
   @PreDestroy
