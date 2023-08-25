@@ -28,6 +28,7 @@ namespace StudiosService.Data.Repositories
             }
         }
 
+
         public async Task<IEnumerable<Game>> GetGamesAsync()
         {
             return await _dataContext.Set<Game>().ToListAsync();
