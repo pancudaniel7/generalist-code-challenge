@@ -11,3 +11,7 @@ services:
       MYSQL_PASSWORD: reddog
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  studiosservicewebapi:
+    image: studios-service_web-api
+    ports:
+      - '5010:80'
