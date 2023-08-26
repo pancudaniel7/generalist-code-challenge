@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudiosService.Data.Models;
+using System;
 
 namespace StudiosService.Data.Repositories
 {
@@ -37,6 +38,23 @@ namespace StudiosService.Data.Repositories
         public async Task<IEnumerable<Game>> GetGamesByStudioAsync(int studioKey)
         {
             return await _dataContext.Set<Game>().Where(game => game.StudioKey == studioKey).ToListAsync();
+        }
+
+        public async Task<int> GetCountOfGamesAsync()
+        {
+            return await _dataContext.Set<Game>().CountAsync();
+        }
+
+        public Game GetGameByRowNumber(int rowNumber)
+        {
+            return _dataContext.Set<Game>().AsQueryable().OrderBy(game => game.Id).Skip(rowNumber).FirstOrDefault();
+        }
+
+        public async Task UpdateGameAsync(Game game, double randomValue)
+        {
+            game.Rating = randomValue;
+            _dataContext.Set<Game>().Update(game);
+            await _dataContext.SaveChangesAsync();
         }
     }
 }

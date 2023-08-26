@@ -15,3 +15,5 @@ services:
     image: studios-service_web-api
     ports:
       - '5010:80'
+  studiosserviceworkerservice:
+    image: studios-service_worker-service

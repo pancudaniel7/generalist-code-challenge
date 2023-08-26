@@ -17,7 +17,7 @@ namespace StudiosService.Business.Services
 
         public async Task<GameDto> AddGameAsync(GameParameters gameParameters)
         {
-            var gameToAdd = new Game(gameParameters.Name, RandomGenerator.GenerateRandomNumberBetween(1, 6),
+            var gameToAdd = new Game(gameParameters.Name, RandomGenerator.GenerateRandomNumberBetween(1, 5),
                 gameParameters.StudioKey, gameParameters.Content);
             await _gamesRepository.AddGameAsync(gameToAdd);
 
@@ -36,6 +36,18 @@ namespace StudiosService.Business.Services
             var games = studioKey == 0 ? (await _gamesRepository.GetGamesAsync()).ToList() : (await _gamesRepository.GetGamesByStudioAsync(studioKey)).ToList();
 
             return games.Select(GameDto.MapGameToDto);
+        }
+
+        public async Task UpdateRandomGameAsync()
+        {
+            var randomValue = RandomGenerator.GenerateRandomNumberBetween(1, 5);
+            var gamesCount = await _gamesRepository.GetCountOfGamesAsync();
+            var gameToUpdateIndex = RandomGenerator.GenerateRandomIndexLessThan(gamesCount);
+            var game = _gamesRepository.GetGameByRowNumber(gameToUpdateIndex);
+            if (game != null)
+            {
+                await _gamesRepository.UpdateGameAsync(game, randomValue);
+            }
         }
     }
 }
