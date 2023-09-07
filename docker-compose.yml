@@ -8,6 +8,8 @@ services:
       - '9090:9090'
     depends_on:
       - mysql
+    environment:
+      - DB_HOST=mysql
   mysql:
     image: mysql:latest
     ports:
@@ -19,8 +21,3 @@ services:
       MYSQL_PASSWORD: reddog
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - '8080:8080'
