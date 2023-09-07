@@ -1,5 +1,15 @@
 version: '3.8'
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '9090:9090'
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql
   mysql:
     image: mysql:latest
     ports:
